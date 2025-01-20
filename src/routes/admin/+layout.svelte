@@ -11,7 +11,7 @@
 </script>
 
 <!-- DOM begins here -->
-<Sidebar.Provider>
+<Sidebar.Provider class="bg-neutral-100">
 	<SidebarRoot />
 	<!-- #Application -->
 	<main class="flex-1">

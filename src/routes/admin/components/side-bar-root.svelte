@@ -54,7 +54,7 @@
 						<Sidebar.MenuItem>
 							<Sidebar.MenuButton>
 								{#snippet child({ props }: iSideBarMenuButton)}
-									<a href={`admin/${item.url}`} {...props} onclick={() => console.log('clicked')}>
+									<a href={`/admin/${item.url}`} {...props} onclick={() => console.log('clicked')}>
 										<item.icon />
 										<span class="capitalize">{item.title}</span>
 									</a>
