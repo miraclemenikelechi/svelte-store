@@ -12,28 +12,33 @@
 
 	const items = [
 		{
-			title: 'Home',
-			url: '#',
+			title: 'overview',
+			url: 'overview',
 			icon: House
 		},
 		{
-			title: 'Inbox',
-			url: '#',
+			title: 'products',
+			url: 'products',
 			icon: Inbox
 		},
 		{
-			title: 'Calendar',
-			url: '#',
+			title: 'users',
+			url: 'users',
 			icon: Calendar
 		},
 		{
-			title: 'Search',
-			url: '#',
+			title: 'orders',
+			url: 'orders',
 			icon: Search
 		},
 		{
-			title: 'Settings',
-			url: '#',
+			title: 'categories',
+			url: 'categories',
+			icon: Settings
+		},
+		{
+			title: 'store front',
+			url: 'store-front',
 			icon: Settings
 		}
 	];
@@ -49,9 +54,9 @@
 						<Sidebar.MenuItem>
 							<Sidebar.MenuButton>
 								{#snippet child({ props }: iSideBarMenuButton)}
-									<a href={item.url} {...props}>
+									<a href={`admin/${item.url}`} {...props} onclick={() => console.log('clicked')}>
 										<item.icon />
-										<span>{item.title}</span>
+										<span class="capitalize">{item.title}</span>
 									</a>
 								{/snippet}
 							</Sidebar.MenuButton>
