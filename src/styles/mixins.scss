@@ -1,0 +1,293 @@
+@use "sass:map";
+@use "functions" as *;
+@use "variables" as *;
+
+// Mixin for applying a debug outline based on the specified mode.
+//
+// This mixin adds a visual outline to an element for debugging purposes,
+// allowing you to easily distinguish between light and dark modes.
+//
+// Parameters:
+// - `$mode`: The mode for the outline ("light" for a light outline, "dark" for a dark outline).
+//
+// Usage Example:
+// .debug-element {
+//     @include debug(light);
+// }
+// In this example, the element will have a light-colored outline for debugging purposes.
+//
+// .debug-element-dark {
+//     @include debug(dark);
+// }
+// In this example, the element will have a dark-colored outline for debugging purposes.
+
+@mixin debug($mode) {
+
+    // Check if the mode is 'light'
+    @if $mode ==light {
+        // If it is, set the outline to .25rem groove and a random light color
+        outline: 0.25rem groove random-light-color();
+    }
+
+    // Check if the mode is 'dark'
+    @else if $mode ==dark {
+        // If it is, set the outline to .25rem groove and a random dark color
+        outline: 0.25rem groove random-dark-color();
+    }
+}
+
+// Mixin to create elements with equal height and width.
+//
+// This mixin ensures that the height and width of an element are the same,
+// allowing for square or rectangular shapes based on the specified size.
+//
+// Parameters:
+// - `$h-w`: The height and width value (default: `100%`).
+//
+// Usage Example:
+// .square {
+//     @include equal(200px);
+// }
+// In this example, the `.square` class will have both height and width set to 200px.
+
+@mixin equal($h-w: 100%) {
+    height: $h-w; // Set height to specified value (default is 100%).
+    width: $h-w; // Set width to specified value (default is 100%).
+}
+
+// Mixin for creating a flexible layout using Flexbox.
+//
+// This mixin allows you to customize the display type, direction, justification, and alignment of flex items.
+//
+// Parameters:
+// - `$type`: The display type (`flex` or `inline`, default: `flex`).
+// - `$d`: Direction of flex items (default: `row`).
+// - `$j`: Justification of flex items (default: `center`).
+// - `$a`: Alignment of flex items (default: `center`).
+//
+// Usage Example:
+// .container {
+//     @include flex($display: inline, $d: column, $j: space-between, $a: stretch);
+// }
+
+@mixin flex($type: flex, $d: row, $j: center, $a: center) {
+    display: if($type == inline, inline-flex, flex); // Set display to inline-flex or flex.
+    flex-direction: $d; // Set the direction of flex items (row or column).
+    justify-content: $j; // Set horizontal alignment of flex items.
+    align-items: $a; // Set vertical alignment of flex items.
+}
+
+// Mixin for applying font styles with customizable properties.
+//
+// This mixin allows you to set the font family, size, and weight for an element,
+// using predefined mappings or custom values.
+//
+// Parameters:
+// - `$f`: The font family key or custom value (default: `null`).
+// - `$s`: The font size key or custom value (default: `null`).
+// - `$w`: The font weight key or custom value (default: `null`).
+//
+// Usage Example:
+// .text {
+//     @include font('primary', '16px', 'bold');
+// }
+// In this example, the element will have the primary font family, a size of 16px,
+// and a bold weight. If 'primary' is a key in the $ff map, it will use the corresponding value.
+
+@mixin font($f: null, $s: null, $w: null) {
+    $font-family: if($f !=null and map.has-key($ff, $f), map.get($ff, $f), $f);
+    $font-size: if($s !=null and map.has-key($fz, $s), map.get($fz, $s), $s);
+    $font-weight: if($w !=null and map.has-key($fw, $w), map.get($fw, $w), $w);
+
+    font: {
+        family: $font-family;
+        size: $font-size;
+        weight: $font-weight;
+    }
+}
+
+// Mixin for generating CSS custom properties (variables) from a map with an optional prefix.
+//
+// This mixin takes a map of key-value pairs and generates corresponding CSS custom properties,
+// allowing for easy management of CSS variables in your stylesheets. An optional prefix can be
+// added to each variable name for better organization.
+//
+// Parameters:
+// - `$map`: A map containing key-value pairs where the key represents the variable name
+//   (without the `--` prefix) and the value represents the variable value (default: `null`).
+// - `$prefix`: An optional prefix to prepend to each variable name (default: `null`).
+//
+// Usage Example:
+// $colors: (
+//     primary: #3498db,
+//     secondary: #2ecc71,
+//     accent: #e74c3c
+// );
+//
+// .element {
+//     @include generate-css-variables($colors, 'theme');
+// }
+// In this example, the mixin will generate the following CSS variables:
+// --theme-primary: #3498db;
+// --theme-secondary: #2ecc71;
+// --theme-accent: #e74c3c;
+//
+// Without a prefix:
+// .element {
+//     @include generate-css-variables($colors);
+// }
+// This will generate:
+// --primary: #3498db;
+// --secondary: #2ecc71;
+// --accent: #e74c3c;
+
+@mixin generate-css-vars($map: null, $prefix: null) {
+    @each $key, $value in $map {
+        @if $prefix {
+            --#{$prefix}-#{$key}: #{$value};
+        }
+
+        @else {
+            --#{$key}: #{$value};
+        }
+    }
+}
+
+// Mixin for creating a CSS Grid layout.
+//
+// This mixin allows you to set up a grid layout with a specified number of rows and columns,
+// using a flexible unit for sizing. By default, it creates equal-sized grid items.
+//
+// Parameters:
+// - `$r-c`: The number of rows and columns in the grid (default: `null`).
+// - `$f-u`: The flexible unit for grid item sizing (default: `1fr`).
+//
+// Usage Example:
+// .grid-container {
+//     @include grid(3, 1fr);
+// }
+// In this example, the container will have a grid layout with 3 rows and 3 columns,
+// each sized to take up an equal fraction of the available space.
+
+@mixin grid($r-c: null, $f-u: 1fr) {
+    display: grid;
+    grid-template-columns: repeat($r-c, $f-u);
+    grid-template-rows: repeat($r-c, $f-u);
+}
+
+// Mixin for responsive breakpoints to apply styles conditionally.
+//
+// This mixin allows you to define styles that should be applied based on specified
+// responsive breakpoints, enabling responsive design in your stylesheets.
+//
+// Parameters:
+// - `$type`: The type of breakpoint to apply ("min" for minimum width, "max" for maximum width).
+// - `$bp`: The breakpoint value (e.g., `768px`, `1200px`).
+//
+// Usage Example:
+// .responsive-container {
+//     @include r-bp(min, 768px) {
+//         background-color: lightblue; // Apply this style for screens wider than 768px.
+//     }
+// }
+//
+// .responsive-text {
+//     @include r-bp(max, 600px) {
+//         font-size: 14px; // Apply this style for screens narrower than 600px.
+//     }
+// }
+
+@mixin r-bp($type, $bp) {
+
+    // Apply styles for minimum breakpoint.
+    @if $type ==min {
+        @media (min-width: $bp) {
+            @content; // Insert content here when the condition is met.
+        }
+    }
+
+    // Apply styles for maximum breakpoint.
+    @else if $type ==max {
+        @media (max-width: $bp) {
+            @content; // Insert content here when the condition is met.
+        }
+    }
+}
+
+// Mixin for responsive width based on a specified type (min or max).
+//
+// This mixin sets the width of an element based on either a minimum or maximum value,
+// allowing for responsive designs that adapt to different screen sizes.
+//
+// Parameters:
+// - `$type`: The type of width to apply ("min" for minimum width, "max" for maximum width).
+// - `$p`: The percentage or value to compare against (default: `100%`).
+// - `$w`: The width value to apply (e.g., `500px`, `80%`).
+//
+// Usage Example:
+// .responsive-min-width {
+//     @include r-w(min, 100%, 300px);
+// }
+// In this example, the element will have a minimum width of 300px or 100% of its parent,
+// whichever is smaller.
+//
+// .responsive-max-width {
+//     @include r-w(max, 100%, 600px);
+// }
+// In this example, the element will have a maximum width of 600px or 100% of its parent,
+// whichever is larger.
+
+@mixin r-w($type, $p: 100%, $w) {
+
+    // Check if the type is 'min' to set the minimum width.
+    @if $type ==min {
+        width: min($p, $w);
+    }
+
+    // Check if the type is 'max' to set the maximum width.
+    @else if $type ==max {
+        width: max($p, $w);
+    }
+}
+
+// Mixin for adding spacing between child elements in a container.
+//
+// This mixin applies either vertical or horizontal spacing between all direct child elements
+// of a container based on the specified type and size.
+//
+// Parameters:
+// - `$type`: The type of spacing ("v" for vertical, "h" for horizontal).
+// - `$size`: The amount of spacing to apply (e.g., `10px`, `1rem`).
+//
+// Usage Example:
+// .vertical-spacing {
+//     @include space(v, 20px);
+// }
+// In this example, all direct child elements will have a top margin of 20px,
+// except for the first child, which will have no top margin.
+//
+// .horizontal-spacing {
+//     @include space(h, 15px);
+// }
+// In this example, all direct child elements will have left and right margins of 15px.
+
+@mixin space($type, $size) {
+    &>* {
+
+        // Target all direct child elements.
+        // Apply vertical spacing between elements.
+        @if $type =="v" {
+            margin-top: $size; // Set top margin.
+
+            &:first-child {
+                margin-top: 0; // Remove top margin for the first child.
+            }
+        }
+
+        // Apply horizontal spacing between elements.
+        @else if $type =="h" {
+            margin-left: $size; // Set left margin.
+            margin-right: $size; // Set right margin.
+        }
+    }
+}

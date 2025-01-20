@@ -1,7 +1,7 @@
 <script lang="ts">
-	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
-	import type { Snippet } from 'svelte';
-	import SidebarRoot from './components/side-bar-root.svelte';
+	import * as Sidebar from "$lib/components/ui/sidebar/index.js";
+	import type { Snippet } from "svelte";
+	import SidebarRoot from "./components/side-bar-root.svelte";
 
 	interface props {
 		children: Snippet;

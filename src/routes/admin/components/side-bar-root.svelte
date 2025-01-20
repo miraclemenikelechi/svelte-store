@@ -1,10 +1,10 @@
 <script lang="ts">
-	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
-	import Calendar from 'lucide-svelte/icons/calendar';
-	import House from 'lucide-svelte/icons/house';
-	import Inbox from 'lucide-svelte/icons/inbox';
-	import Search from 'lucide-svelte/icons/search';
-	import Settings from 'lucide-svelte/icons/settings';
+	import * as Sidebar from "$lib/components/ui/sidebar/index.js";
+	import Calendar from "lucide-svelte/icons/calendar";
+	import House from "lucide-svelte/icons/house";
+	import Inbox from "lucide-svelte/icons/inbox";
+	import Search from "lucide-svelte/icons/search";
+	import Settings from "lucide-svelte/icons/settings";
 
 	interface iSideBarMenuButton {
 		props: Record<string, unknown>;
@@ -12,33 +12,33 @@
 
 	const items = [
 		{
-			title: 'overview',
-			url: 'overview',
+			title: "overview",
+			url: "overview",
 			icon: House
 		},
 		{
-			title: 'products',
-			url: 'products',
+			title: "products",
+			url: "products",
 			icon: Inbox
 		},
 		{
-			title: 'users',
-			url: 'users',
+			title: "users",
+			url: "users",
 			icon: Calendar
 		},
 		{
-			title: 'orders',
-			url: 'orders',
+			title: "orders",
+			url: "orders",
 			icon: Search
 		},
 		{
-			title: 'categories',
-			url: 'categories',
+			title: "categories",
+			url: "categories",
 			icon: Settings
 		},
 		{
-			title: 'store front',
-			url: 'store-front',
+			title: "store front",
+			url: "store-front",
 			icon: Settings
 		}
 	];
@@ -54,7 +54,7 @@
 						<Sidebar.MenuItem>
 							<Sidebar.MenuButton>
 								{#snippet child({ props }: iSideBarMenuButton)}
-									<a href={`/admin/${item.url}`} {...props} onclick={() => console.log('clicked')}>
+									<a href={`/admin/${item.url}`} {...props} onclick={() => console.log("clicked")}>
 										<item.icon />
 										<span class="capitalize">{item.title}</span>
 									</a>

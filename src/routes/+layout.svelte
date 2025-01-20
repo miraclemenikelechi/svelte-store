@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { afterNavigate, beforeNavigate } from '$app/navigation';
-	import nProgress from 'nprogress';
-	import '../app.scss'; // global css
+	import { afterNavigate, beforeNavigate } from "$app/navigation";
+	import nProgress from "nprogress";
+	import "../app.scss"; // global css
 
 	let { children } = $props(); // to render content on the client. must be done.
 

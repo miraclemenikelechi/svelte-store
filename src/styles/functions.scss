@@ -1,0 +1,37 @@
+@use "sass:math";
+
+// Function to generate a random dark color in HSL format.
+//
+// This function creates a random color with a random hue, saturation, and lightness,
+// ensuring that the lightness value is kept below 50% to produce darker colors.
+//
+// @return: A string representing the HSL color value.
+//
+// Usage Example:
+// $dark-color: random-dark-color();
+// In this example, $dark-color will hold a randomly generated dark color.
+
+@function random-dark-color() {
+    $hue: math.random(360);
+    $saturation: math.percentage(calc(math.random(100) / 100));
+    $lightness: math.percentage(calc(math.random(50) / 100));
+    @return hsl($hue, $saturation, $lightness);
+}
+
+// Function to generate a random light color in HSL format.
+//
+// This function creates a random color with a random hue and saturation,
+// ensuring that the lightness value is kept at or above 50% to produce lighter colors.
+//
+// @return: A string representing the HSL color value.
+//
+// Usage Example:
+// $light-color: random-light-color();
+// In this example, $light-color will hold a randomly generated light color.
+
+@function random-light-color() {
+    $min-lightness: 50%;
+    $hue: math.random(360);
+    $saturation: math.random(50) + 50%;
+    @return hsl($hue, $saturation, $min-lightness);
+}
