@@ -13,7 +13,7 @@
 
 		<div class="flex items-center justify-center gap-2">
 			<Input placeholder="Search Products..." class="w-[9.25rem] lg:w-[15.5rem]" />
-			<Button href="product/add" class="capitalize">add product</Button>
+			<Button href="products/add" class="capitalize">add product</Button>
 		</div>
 	</header>
 
