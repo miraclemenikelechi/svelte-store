@@ -9,14 +9,9 @@
 	} from "$lib/schemas/form-schema.js";
 	import Loader from "lucide-svelte/icons/loader";
 	import type { HTMLInputTypeAttribute } from "svelte/elements";
-	import { filesProxy, superForm, type Infer, type SuperValidated } from "sveltekit-superforms";
+	import { filesProxy, superForm, type Infer } from "sveltekit-superforms";
 	import { zodClient } from "sveltekit-superforms/adapters";
-
-	interface props {
-		data: {
-			form: SuperValidated<Infer<tAddProductFormSchema>>;
-		};
-	}
+	import type { PageData } from "./$types";
 
 	interface iFormField {
 		label: string;
@@ -28,7 +23,7 @@
 		images: string[];
 	}
 
-	let { data }: props = $props();
+	let { data }: { data: PageData } = $props();
 
 	const form = superForm(data.form, {
 		validators: zodClient(addProductFormSchema),
@@ -37,7 +32,7 @@
 
 	const { delayed, errors, enhance, form: formData } = form;
 	const images = filesProxy(form, "images");
-	let imagePreview = $derived(Array.from($images).map((file) => URL.createObjectURL(file)));
+	let imagesPreview = $derived(Array.from($images).map((file) => URL.createObjectURL(file)));
 </script>
 
 <section class="main-wrapper">
@@ -51,18 +46,8 @@
 				<Card.Header>
 					<Card.Title class="capitalize">product information</Card.Title>
 				</Card.Header>
-				<Card.Content class="space-y-4">
-					<!-- <Form.Field {form} name="name">
-						<Form.Control>
-							{#snippet children({ props })}
-								<Form.Label>Email</Form.Label>
-								<Input {...props} bind:value={$formData.name} />
-							{/snippet}
-						</Form.Control>
-						<Form.Description />
-						<Form.FieldErrors />
-					</Form.Field> -->
 
+				<Card.Content class="space-y-4">
 					{@render formField({ label: "product name", name: "name" })}
 					{@render formField({ label: "description", name: "description" })}
 
@@ -97,8 +82,8 @@
 						{/if}
 					</Form.Field>
 
-					{#if imagePreview.length}
-						{@render preview({ images: imagePreview })}
+					{#if imagesPreview.length}
+						{@render preview({ images: imagesPreview })}
 					{/if}
 
 					<Button class="w-full">
