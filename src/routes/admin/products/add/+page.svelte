@@ -77,7 +77,7 @@
 								<span class="text-red-500">{error}</span>
 							{/each}
 						{/if}
-					</Form.Field>
+					</Form.Field>   
 
 					{#if imagesPreview.length}
 						{@render preview({ images: imagesPreview })}

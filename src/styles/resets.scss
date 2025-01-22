@@ -1,0 +1,12 @@
+@use "mixins" as *;
+@use "variables" as *;
+@use "extensions" as *;
+
+img,
+svg {
+    @include equal;
+}
+
+i {
+    @include flex;
+}

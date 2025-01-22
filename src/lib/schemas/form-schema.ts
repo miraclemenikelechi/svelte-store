@@ -26,7 +26,7 @@ export const addCategorySchema = z.object({
 
 	description: z.string().min(3, "must be more than 3 characters."),
 
-	subCategory: z.string().array().min(1, "must be more than one character")
+	subCategories: z.string().array().min(1, "must be more than one category")
 });
 
 export type tAddCategorySchema = typeof addCategorySchema;
