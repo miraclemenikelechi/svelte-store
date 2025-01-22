@@ -3,10 +3,7 @@
 	import * as Card from "$lib/components/ui/card/index.js";
 	import * as Form from "$lib/components/ui/form/index.js";
 	import { Input } from "$lib/components/ui/input";
-	import {
-		schema as addProductFormSchema,
-		type tSchema as tAddProductFormSchema
-	} from "$lib/schemas/form-schema.js";
+	import { addProductSchema, type tAddProductSchema } from "$lib/schemas/form-schema.js";
 	import Loader from "lucide-svelte/icons/loader";
 	import type { HTMLInputTypeAttribute } from "svelte/elements";
 	import { filesProxy, superForm, type Infer } from "sveltekit-superforms";
@@ -15,7 +12,7 @@
 
 	interface iFormField {
 		label: string;
-		name: keyof Infer<tAddProductFormSchema>;
+		name: keyof Infer<tAddProductSchema>;
 		type?: HTMLInputTypeAttribute;
 	}
 
@@ -26,7 +23,7 @@
 	let { data }: { data: PageData } = $props();
 
 	const form = superForm(data.form, {
-		validators: zodClient(addProductFormSchema),
+		validators: zodClient(addProductSchema),
 		validationMethod: "auto"
 	});
 
@@ -41,7 +38,7 @@
 	</header>
 
 	<footer>
-		<form action="" method="POST" enctype="multipart/form-data">
+		<form action="" method="POST" enctype="multipart/form-data" use:enhance>
 			<Card.Root>
 				<Card.Header>
 					<Card.Title class="capitalize">product information</Card.Title>
