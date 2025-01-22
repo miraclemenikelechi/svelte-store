@@ -4,9 +4,9 @@
 
 img,
 svg {
-    @include equal;
+	@include equal;
 }
 
 i {
-    @include flex;
+	@include flex;
 }

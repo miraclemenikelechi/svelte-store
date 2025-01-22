@@ -36,7 +36,6 @@
 			if (value && !$formData.subCategories.includes(value)) {
 				$formData.subCategories = [...$formData.subCategories, value];
 				input.value = "";
-				event.preventDefault();
 			}
 		}
 	}
@@ -109,7 +108,7 @@
 
 <!-- sub category badge ui -->
 {#snippet subCategoryBadge()}
-	<div>
+	<div class="space-x-2">
 		{#each $formData.subCategories as subCategory, index (index)}
 			<Badge class="">
 				<div class="flex items-center justify-center">

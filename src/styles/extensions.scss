@@ -1,6 +1,6 @@
 @use "mixins.scss" as *;
 
 %main-wrapper {
-    padding: 2rem;
-    @include space($type: v, $size: 3rem);
+	padding: 2rem;
+	@include space($type: v, $size: 3rem);
 }

@@ -12,10 +12,10 @@
 // In this example, $dark-color will hold a randomly generated dark color.
 
 @function random-dark-color() {
-    $hue: math.random(360);
-    $saturation: math.percentage(calc(math.random(100) / 100));
-    $lightness: math.percentage(calc(math.random(50) / 100));
-    @return hsl($hue, $saturation, $lightness);
+	$hue: math.random(360);
+	$saturation: math.percentage(calc(math.random(100) / 100));
+	$lightness: math.percentage(calc(math.random(50) / 100));
+	@return hsl($hue, $saturation, $lightness);
 }
 
 // Function to generate a random light color in HSL format.
@@ -30,8 +30,8 @@
 // In this example, $light-color will hold a randomly generated light color.
 
 @function random-light-color() {
-    $min-lightness: 50%;
-    $hue: math.random(360);
-    $saturation: math.random(50) + 50%;
-    @return hsl($hue, $saturation, $min-lightness);
+	$min-lightness: 50%;
+	$hue: math.random(360);
+	$saturation: math.random(50) + 50%;
+	@return hsl($hue, $saturation, $min-lightness);
 }
