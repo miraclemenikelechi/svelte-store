@@ -3,12 +3,12 @@
 	import * as Card from "$lib/components/ui/card/index.js";
 	import * as Form from "$lib/components/ui/form/index.js";
 	import { Input } from "$lib/components/ui/input";
-	import { addProductSchema, type tAddProductSchema } from "$lib/schemas/form-schema.js";
 	import Loader from "lucide-svelte/icons/loader";
 	import type { HTMLInputTypeAttribute } from "svelte/elements";
 	import { filesProxy, superForm, type Infer } from "sveltekit-superforms";
 	import { zodClient } from "sveltekit-superforms/adapters";
 	import type { PageData } from "./$types";
+	import { addProductSchema, type tAddProductSchema } from "$lib/schemas/add-product";
 
 	interface iFormField {
 		label: string;

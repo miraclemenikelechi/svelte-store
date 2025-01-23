@@ -1,4 +1,4 @@
-import { addProductSchema } from "$lib/schemas/form-schema";
+import { addProductSchema } from "$lib/schemas/add-product";
 import { superValidate } from "sveltekit-superforms";
 import { zod } from "sveltekit-superforms/adapters";
 import type { PageServerLoad } from "./$types";

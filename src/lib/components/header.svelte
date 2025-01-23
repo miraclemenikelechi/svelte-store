@@ -1,8 +1,8 @@
 <script lang="ts">
-	import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index.js";
 	import * as Avatar from "$lib/components/ui/avatar/index.js";
-	import { Button } from "./ui/button";
+	import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index.js";
 	import { Menu, ShoppingCartIcon } from "lucide-svelte";
+	import { Button } from "./ui/button";
 
 	interface iLoggedInPages {
 		title: string;

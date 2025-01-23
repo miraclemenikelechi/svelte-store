@@ -1,14 +1,14 @@
 <script lang="ts">
-	import type { PageData } from "./$types";
+	import { Badge } from "$lib/components/ui/badge/index.js";
 	import * as Card from "$lib/components/ui/card/index.js";
 	import * as Form from "$lib/components/ui/form/index.js";
-	import { addCategorySchema, type tAddCategorySchema } from "$lib/schemas/form-schema";
-	import { superForm, type Infer } from "sveltekit-superforms";
-	import type { HTMLInputTypeAttribute } from "svelte/elements";
-	import { zodClient } from "sveltekit-superforms/adapters";
 	import { Input } from "$lib/components/ui/input";
-	import { Badge } from "$lib/components/ui/badge/index.js";
+	import { addCategorySchema, type tAddCategorySchema } from "$lib/schemas/add-category";
 	import { X } from "lucide-svelte";
+	import type { HTMLInputTypeAttribute } from "svelte/elements";
+	import { superForm, type Infer } from "sveltekit-superforms";
+	import { zodClient } from "sveltekit-superforms/adapters";
+	import type { PageData } from "./$types";
 
 	interface iFormField {
 		label: string;

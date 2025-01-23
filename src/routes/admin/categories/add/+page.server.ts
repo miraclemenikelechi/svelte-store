@@ -1,4 +1,4 @@
-import { addCategorySchema } from "$lib/schemas/form-schema";
+import { addCategorySchema } from "$lib/schemas/add-category";
 import { superValidate } from "sveltekit-superforms";
 import { zod } from "sveltekit-superforms/adapters";
 import type { PageServerLoad } from "./$types";
